@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 	def index
-		@movies = Movie.released 
+		@movies = Movie.all
 	end
 
 	def show
@@ -45,6 +45,6 @@ class MoviesController < ApplicationController
 	end
 	private
 	def movie_params
-		params.require(:movie).permit(:title, :total_gross, :rating, :description, :released_on)
+		params.require(:movie).permit(:title, :total_gross, :rating, :description, :released_on, :director,:duration, :cast, :image_file_name)
 	end
 end
