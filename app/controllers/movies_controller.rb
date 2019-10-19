@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 	before_action :set_movie, only: [:show,:update,:edit,:destroy]
-	
+
 	def index
 		@movies = Movie.all
 	end
@@ -13,9 +13,8 @@ class MoviesController < ApplicationController
 
 
 	def update
-
 		if @movie.update(movie_params)
-			redirect_to @movie
+			redirect_to @movie, notice: "Movie successfully updated!"
 		else
 			render :edit
 		end
@@ -28,7 +27,7 @@ class MoviesController < ApplicationController
 	def create
 		@movie = Movie.new(movie_params)
 		if @movie.save
-			redirect_to @movie
+			redirect_to @movie, notice: "Movie successfully created!"
 		else
 			render :new
 		end
@@ -36,7 +35,7 @@ class MoviesController < ApplicationController
 
 	def destroy
 		if @movie.destroy
-			redirect_to movies_url
+			redirect_to movies_url, alert: "Movie successfully deleted!"
 		else
 			render :show
 		end
