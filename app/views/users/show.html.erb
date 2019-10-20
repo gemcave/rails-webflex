@@ -1,0 +1,32 @@
+<article id="user">
+  <header>
+    <h1><%= @user.name %> <% if !@user.username.blank? %> aka <%= @user.username%><% end %></h1>
+    <h2><%= mail_to(@user.email) %></h2>
+  </header>
+	<strong>Member Since:</strong>
+	<p>
+		<%= time_ago_in_words(@user.created_at)%>
+	</p>
+	<% if @favorite_movies.any? %>
+		<h3>Favorite Movies</h3>
+		<ul>
+		<% @favorite_movies.each do |movie| %>
+			<li>
+				<%= link_to movie.title, movie %>
+			</li>
+		<% end %>
+		</ul>
+<% end %>
+  <footer>
+    <nav>
+		<% if current_user?(@user) %>
+
+				<%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
+				<%= link_to 'Delete Account', @user,
+										method: :delete,
+										data: { confirm: 'Are you sure you want to permanently delete your account?' },
+										class: 'button' %>
+			<% end %>
+    </nav>
+  </footer>
+</article>

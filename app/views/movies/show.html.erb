@@ -33,6 +33,34 @@
 		<%= format_average_stars(@movie) %>
 	</p>
 
+	<h3>Genres</h3>
+	<ul>
+		<% @genres.each do |genre| %>
+			<li><%= genre.name %></li>
+		<% end %>
+	</ul>
+	
+	<h3>Fans</h3>
+	<p>
+		<%= pluralize(@fans.size, 'fan') %> 
+	</p>
+	<% if @fans.any? %>
+		<h3>Fans</h3>
+		<ul>
+			<% @fans.each do |user| %>
+				<li>
+					<%= link_to user.name, user %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	<% if @current_favorite %>
+    <%= button_to "Unfave", movie_favourite_path(@movie, @current_favorite), method: :delete, class: "button unfave" %>
+  <% else %>  
+    <%= button_to "Fave", movie_favourites_path(@movie), class: "button fave" %>
+  <% end %>
+
 	<% if @movie.recent_reviews.any? %>
 		<h3>Recent Reviews</h3>
 		<ol class="reviews">
