@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
 		@user = User.find(params[:id])
-		@favorite_movies = @user.favorite_movies
+		@favorite_movies = @user.favourite_movies
   end
 
   def new

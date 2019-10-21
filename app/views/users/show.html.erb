@@ -1,4 +1,6 @@
-<article id="user">
+<% content_for(:title, @user.name) %>
+
+<article class="user">
   <header>
     <h1><%= @user.name %> <% if !@user.username.blank? %> aka <%= @user.username%><% end %></h1>
     <h2><%= mail_to(@user.email) %></h2>
@@ -7,16 +9,18 @@
 	<p>
 		<%= time_ago_in_words(@user.created_at)%>
 	</p>
-	<% if @favorite_movies.any? %>
-		<h3>Favorite Movies</h3>
-		<ul>
-		<% @favorite_movies.each do |movie| %>
-			<li>
-				<%= link_to movie.title, movie %>
-			</li>
+	<%= content_for :side do %>
+			<% if @favorite_movies.any? %>
+				<h3>Favorite Movies</h3>
+				<ul>
+				<% @favorite_movies.each do |movie| %>
+					<li>
+						<%= link_to movie.title, movie %>
+					</li>
+				<% end %>
+				</ul>
 		<% end %>
-		</ul>
-<% end %>
+	<% end %>
   <footer>
     <nav>
 		<% if current_user?(@user) %>
